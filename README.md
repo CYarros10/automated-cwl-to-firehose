@@ -59,7 +59,7 @@ CLI Example:
 
 ### Check to see if subscription filter was added to cloudwatch log group
 
-1. Go to [CloudWatch Log groups Console])(https://console.aws.amazon.com/cloudwatch/home#logs:)
+1. Go to [CloudWatch Log groups Console](https://console.aws.amazon.com/cloudwatch/home#logs:)
 2. Your Log Group should now have a subscription under the **Subscriptions** column.
 
 ### See logs routed to firehose delivery stream
