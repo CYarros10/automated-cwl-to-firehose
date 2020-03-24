@@ -12,12 +12,11 @@ Some CloudWatch logs are more important than others.  You'll want to route these
 
 ## Architecture
 
-![Stack-Resources](https://github.com/CYarros10/csv-to-parquet-via-glue/blob/master/architecture/datalake-transforms.png)
+![Stack-Resources](https://github.com/CYarros10/automated-cwl-to-firehose/blob/master/architecture/cwl-to-firehose.png)
 
 ----
 
 ## Deploying Cloudformation
-
 
 1. Go to [AWS Cloudformation Console](https://console.aws.amazon.com/cloudformation/) and choose **Create stack**
 2. upload the cloudformation/master.yml template
@@ -25,17 +24,17 @@ Some CloudWatch logs are more important than others.  You'll want to route these
 
 This Stack will create the following:
 
-1. S3 bucket for logs destination
-2. firehose delivery stream
-3. CWL to Firehose roles/policies
-4. lambda function
-5. cloudwatch events rule
+1. S3 bucket - CloudWatch Logs destination
+2. Kinesis Firehose Delivery Stream - Subscription Filter target
+3. Lambda function - Puts Subscription Filters on CloudWatch Logs Groups
+4. CloudWatch Events Rule - Fires off Lambda whenever a tag is added to CloudWatch Log Group
+5. IAM roles/policies for Lambda, Kinesis
 
 ## Viewing Results
 
 ### Add a tag to a cloudwatch log group
 
-Tag Basics
+#### Tag Basics
 
 You use the AWS CLI or CloudWatch Logs API to complete the following tasks:
 
@@ -54,16 +53,16 @@ You can use tags to categorize your log groups. For example, you can categorize 
 
 via [Working with Log Groups and Log Streams](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html#log-group-tagging)
 
-Examples:
+CLI Example:
 
         aws logs tag-log-group --log-group-name /aws-glue/crawlers --tags captured=true
 
-### Check to see if subscription filter was added
+### Check to see if subscription filter was added to cloudwatch log group
 
-1. Go to [CloudWatch Log groups Console])(https://console.aws.amazon.com/cloudwatch/home#logs:)
+1. Go to [CloudWatch Log groups Console](https://console.aws.amazon.com/cloudwatch/home#logs:)
 2. Your Log Group should now have a subscription under the **Subscriptions** column.
 
-### See logs routed to firehose
+### See logs routed to firehose delivery stream
 
 Once your log group receives logs, they will be sent to the Kinesis Firehose Delivery Stream.
 
