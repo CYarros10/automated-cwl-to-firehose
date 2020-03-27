@@ -12,7 +12,7 @@ Some CloudWatch logs are more important than others.  You'll want to route these
 
 ## Architecture
 
-![Stack-Resources](https://github.com/CYarros10/automated-cwl-to-firehose/blob/master/architecture/cwl-to-firehose.png)
+![Stack-Resources](architecture/cwl-to-firehose.png)
 
 ----
 
